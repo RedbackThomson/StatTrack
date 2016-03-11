@@ -2,13 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Mvvm;
+using StatTrack.UI.Annotations;
 using StatTrack.UI.Models.TrackerOptions;
 
 namespace StatTrack.UI.ViewModels
@@ -20,7 +23,7 @@ namespace StatTrack.UI.ViewModels
         public ICommand DoCloseWindow { get; set; }
 
         public ICommand SelectItemsCommand { get; set; }
-        public IList<SelectableItem<ChatterOptions>> 
+        public ObservableCollection<SelectableItem<ChatterOptions>> 
             SelectableChatterOptions { get; set; }
 
         public SettingsViewModel() : this(new StatTrackSettings(), new TrackerOptions())
@@ -34,8 +37,24 @@ namespace StatTrack.UI.ViewModels
 
             SelectItemsCommand = new SelectItemsCommand<ChatterOptions>(ref 
                 trackerOptions.SelectedChatterOptions);
-            SelectableChatterOptions = new SelectableItems<ChatterOptions>
-                (GetEnumValues<ChatterOptions>(), trackerOptions.SelectedChatterOptions).GetSelectableItems();
+
+            SelectableChatterOptions = new ObservableCollection<SelectableItem<ChatterOptions>>();
+            AddSelectedEnums(SelectableChatterOptions, TrackerOptions.SelectedChatterOptions);
+            SelectableChatterOptions.CollectionChanged += SelectedChatterOptionsChanged;
+        }
+
+        private void SelectedChatterOptionsChanged(object sender, 
+            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            TrackerOptions.SelectedChatterOptions = (List<ChatterOptions>) 
+                notifyCollectionChangedEventArgs.NewItems;
+        }
+
+        public static void AddSelectedEnums<T>(ObservableCollection<SelectableItem<T>> collection, 
+            IList<T> selected) where T : struct
+        {
+            foreach(var option in GetEnumValues<T>())
+                collection.Add(new SelectableItem<T>(option){IsSelected = selected.Contains(option)});
         }
 
         public static List<T> GetEnumValues<T>() where T : struct
@@ -64,45 +83,45 @@ namespace StatTrack.UI.ViewModels
 
         public void Execute(object parameter)
         {
-            var selected = (SelectableItem<T>[]) parameter;
+            var list = (IList) parameter;
+            var collections = list.Cast<SelectableItem<T>>();
 
             _output.Clear();
-            foreach(var item in selected)
+            foreach(var item in collections)
                 _output.Add(item.Item);
         }
 
         public event EventHandler CanExecuteChanged;
     }
 
-    public class SelectableItems<T>
+    public class SelectableItem<T> : INotifyPropertyChanged
     {
-        private readonly ICollection<T> _items;
-        private readonly ICollection<T> _preselected; 
-
-        public IList<SelectableItem<T>> GetSelectableItems()
-        {
-            return _items.Select(item => new SelectableItem<T>
-            {
-                IsSelected = _preselected.Contains(item), 
-                Item = item
-            }).ToList();
+        private bool _selected;
+        public bool IsSelected 
+        { 
+            get { return _selected; }
+            set 
+            { 
+                if (value == _selected) return;
+                _selected = value; 
+                OnPropertyChanged("IsSelected");
+            } 
         }
-
-        public SelectableItems(ICollection<T> items) : this(items, new List<T>()) 
-        {
-        }
-
-        public SelectableItems(ICollection<T> items, ICollection<T> selected)
-        {
-            _items = items;
-            _preselected = selected;
-        }
-    }
-
-    public class SelectableItem<T>
-    {
-        public bool IsSelected { get; set; }
         public T Item { get; set; }
+
+        public SelectableItem(T item)
+        {
+            Item = item;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public class EnumDescriptionConverter : IValueConverter

@@ -9,7 +9,7 @@ namespace StatTrack.UI.Models.TrackerOptions
 {
     public enum ChatterOptions
     {
-        [Description("Viewers lolwhat")]
+        [Description("Viewers")]
         Viewers,
 
         [Description("Moderators")]

@@ -31,7 +31,7 @@
 			</ListBox.ItemTemplate>
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="SelectionChanged">
-					<i:InvokeCommandAction Command="{Binding SelectItemsCommand}" CommandParameter="{Binding Path=SelectedItems, ElementName=TrackersList}"/>
+					<i:InvokeCommandAction Command="{Binding SelectItemsCommand}" CommandParameter="{Binding SelectedItems, ElementName=TrackersList}"/>
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 			<ListBox.ItemContainerStyle>
