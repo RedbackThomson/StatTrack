@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatTrack", "StatTrack\StatTrack.csproj", "{AD16419D-7311-4490-B1D9-AFC5627137AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatTrack.UI", "StatTrack.UI\StatTrack.UI.csproj", "{3CB7D7E5-501F-4E55-BAB6-3C310D24F489}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD16419D-7311-4490-B1D9-AFC5627137AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD16419D-7311-4490-B1D9-AFC5627137AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD16419D-7311-4490-B1D9-AFC5627137AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD16419D-7311-4490-B1D9-AFC5627137AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB7D7E5-501F-4E55-BAB6-3C310D24F489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB7D7E5-501F-4E55-BAB6-3C310D24F489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB7D7E5-501F-4E55-BAB6-3C310D24F489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB7D7E5-501F-4E55-BAB6-3C310D24F489}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

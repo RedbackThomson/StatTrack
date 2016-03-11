@@ -1,0 +1,55 @@
+﻿<UserControl 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:StatTrack.UI.ViewModels"
+			 xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Mvvm;assembly=Microsoft.Practices.Prism.Mvvm.Desktop"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 x:Class="StatTrack.UI.Views.MainView"
+			 mc:Ignorable="d"
+			 d:DataContext="{d:DesignInstance {x:Type vm:MainViewModel}, IsDesignTimeCreatable=True}"
+			 prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		<vm:BoolToStringConverter x:Key="BoolToRunningConverter" FalseValue="Not Running" TrueValue="Tracking"/>
+		<vm:BoolToStringConverter x:Key="BoolToStartConverter" FalseValue="Start" TrueValue="Stop"/>
+	</UserControl.Resources>
+	<StackPanel>
+        
+		<StackPanel.DataContext>
+			<vm:MainViewModel/>
+		</StackPanel.DataContext>
+		<DockPanel>
+			<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding Tracker.Monitoring, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+				<TextBlock.Text>
+					<MultiBinding StringFormat="{}{0} - {1}">
+						<Binding Path="Tracker.Monitoring" Converter="{StaticResource BoolToRunningConverter}" />
+						<Binding Path="Settings.TwitchSettings.Channel" />
+					</MultiBinding>
+				</TextBlock.Text>
+			</TextBlock>
+			<ToggleButton x:Name="toggleButton" Content="{Binding Tracker.Monitoring, Converter={StaticResource BoolToStartConverter}}" Width="90" HorizontalAlignment="Right" IsChecked="False">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Checked">
+						<i:InvokeCommandAction Command="{Binding StartTracker}"/>
+					</i:EventTrigger>
+					<i:EventTrigger EventName="Unchecked">
+						<i:InvokeCommandAction Command="{Binding StopTracker}"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</ToggleButton>
+		</DockPanel>
+        
+		<TextBlock Text="{Binding ChatterNotifications.Current.Chatters.Viewers.Count, Mode=OneWay, StringFormat=#\,##0 Viewers}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<ListView HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding ChatterNotifications.Current.Chatters.Viewers}" MaxHeight="400">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}"/>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>       
+	</StackPanel>
+</UserControl>

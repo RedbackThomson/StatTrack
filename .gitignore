@@ -1,0 +1,5 @@
+StatTrack/obj/
+packages/
+StatTrack.UI/obj/
+StatTrack.UI/bin/
+StatTrack.sln.DotSettings
