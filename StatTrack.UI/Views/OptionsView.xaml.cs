@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Practices.Prism.Mvvm;
-using StatTrack.Twitch;
-using StatTrack.Twitch.Structures;
 
 namespace StatTrack.UI.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for OptionsView.xaml
     /// </summary>
-    public partial class MainWindow : Window, IView
+    public partial class OptionsView : UserControl
     {
-        public MainWindow()
+        public OptionsView()
         {
             InitializeComponent();
         }
-
     }
 }

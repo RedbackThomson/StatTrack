@@ -1,0 +1,42 @@
+﻿<Window x:Class="StatTrack.UI.Shell"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             Height="750" Width="1250"
+		 	 xmlns:viewModels="clr-namespace:StatTrack.UI.ViewModels"
+			 xmlns:statTrack="clr-namespace:StatTrack;assembly=StatTrack.DockingAdapter"
+			 syncfusion:SkinStorage.VisualStyle="VS2010"
+             Title="Twitch StatTrack" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Window.DataContext>
+        <viewModels:ViewModel />
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="O" Modifiers="Control" Command="{Binding NewDocumentCommand}"/>
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <syncfusion:MenuAdv VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <syncfusion:MenuItemAdv Header="File">
+                <syncfusion:MenuItemAdv Header="Open Document" Command="{Binding OpenDocumentCommand}"/>
+                <syncfusion:MenuItemAdv Header="Exit" Command="{Binding CloseCommand}"/>
+            </syncfusion:MenuItemAdv>
+			<syncfusion:MenuItemAdv Header="Start">
+				<syncfusion:MenuItemAdv.Icon>
+                    <Image Source="pack://application:,,,/Images/control-play.gif" />
+				</syncfusion:MenuItemAdv.Icon>
+			</syncfusion:MenuItemAdv>
+        </syncfusion:MenuAdv>
+
+        <statTrack:DockingAdapter Grid.Row="1" ItemsSource="{Binding Workspaces}"
+                             ActiveDocument="{Binding ActiveDocument,Mode=TwoWay}">
+
+        </statTrack:DockingAdapter>
+
+    </Grid>
+</Window>

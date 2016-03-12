@@ -26,13 +26,11 @@ namespace StatTrack
 
         public StatTrackImpl(int updatePeriod, string channel)
         {
-            _settings = new StatTrackSettings
+            _settings = StatTrackSettings.Instance;
+            _settings.UpdatePeriod = updatePeriod;
+            _settings.TwitchSettings = new TwitchApiSettings
             {
-                UpdatePeriod = updatePeriod,
-                TwitchSettings = new TwitchApiSettings
-                {
-                    Channel = channel
-                }
+                Channel = channel
             };
 
             _api = new TwitchApi(_settings.TwitchSettings);
@@ -54,11 +52,18 @@ namespace StatTrack
         {
             while (true)
             {
-                if (ct.IsCancellationRequested)
-                    ct.ThrowIfCancellationRequested();
-                
-                GetEndpoints();
-                Thread.Sleep(_settings.UpdatePeriod);
+                try
+                {
+                    if (ct.IsCancellationRequested)
+                        ct.ThrowIfCancellationRequested();
+
+                    GetEndpoints();
+                    Thread.Sleep(_settings.UpdatePeriod);
+                }
+                catch (OperationCanceledException ex)
+                {
+                    //Exit gracefully
+                }
             }
         }
 

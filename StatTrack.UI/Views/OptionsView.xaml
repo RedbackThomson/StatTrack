@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="StatTrack.UI.Views.OptionsView"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+           xmlns:viewModels="clr-namespace:StatTrack.UI.ViewModels"
+           mc:Ignorable="d"
+           syncfusion:DockingManager.Header="Options" syncfusion:DockingManager.State="Dock"
+           syncfusion:DockingManager.SideInDockedMode="Left" d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.DataContext>
+		<viewModels:OptionsViewModel />
+	</UserControl.DataContext>
+	<Grid>
+		<Grid.Resources>
+			<HierarchicalDataTemplate x:Key="CheckTreeItem" ItemsSource="{Binding Options}">
+				<CheckBox Content="{Binding Caption}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+			</HierarchicalDataTemplate>
+
+            <Style TargetType="syncfusion:TreeViewItemAdv" x:Key="CheckTreeStyle">
+                <Setter Property="IsExpanded" Value="True"/>
+                <Setter Property="IsEditable" Value="False" />
+            </Style>
+        </Grid.Resources>
+
+		<syncfusion:TreeViewAdv HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowMultiSelect="False" 
+			ItemTemplate="{StaticResource CheckTreeItem}" AnimationType="None" 
+            ItemContainerStyle="{StaticResource CheckTreeStyle}" ItemsSource="{Binding Options}" AllowDrop="False" AllowDragDrop="False"/>
+	</Grid>
+</UserControl>

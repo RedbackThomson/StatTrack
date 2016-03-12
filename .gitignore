@@ -1,6 +1,6 @@
-StatTrack/obj/
-packages/
-StatTrack.UI/obj/
-StatTrack.UI/bin/
-StatTrack.sln.DotSettings
 *.vspx
+obj
+bin
+
+packages/
+StatTrack.sln.DotSettings

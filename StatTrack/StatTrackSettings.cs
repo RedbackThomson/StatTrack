@@ -18,5 +18,12 @@ namespace StatTrack
         /// The Twitch API settings
         /// </summary>
         public TwitchApiSettings TwitchSettings { get; set; }
+
+        private static readonly StatTrackSettings instance = new StatTrackSettings();
+        public static StatTrackSettings Instance { get { return instance; } }
+
+        private StatTrackSettings()
+        {
+        }
     }
 }

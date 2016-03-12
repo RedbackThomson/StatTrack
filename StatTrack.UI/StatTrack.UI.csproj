@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3CB7D7E5-501F-4E55-BAB6-3C310D24F489}</ProjectGuid>
+    <ProjectGuid>{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StatTrack.UI</RootNamespace>
@@ -13,8 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
     <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
-    <TargetPlatformVersion>8.0</TargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,21 +35,19 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Expression.Interactions" />
-    <Reference Include="Microsoft.Practices.Prism.Mvvm">
-      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop">
-      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
-      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
-    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="syncfusion.sfchart.wpf, Version=13.4450.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Shared.Wpf, Version=13.4450.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="syncfusion.tools.wpf, Version=13.4450.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,38 +56,33 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Windows" />
-    <Reference Include="WindowsBase" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\Notifiers\ChattersNotifications.cs" />
-    <Compile Include="Models\Notifiers\INotifier.cs" />
-    <Compile Include="Models\TrackerCommand.cs" />
-    <Compile Include="Models\Notifiers\WindowsNotifier.cs" />
-    <Compile Include="Models\TrackerOptions\ChatterOptions.cs" />
-    <Compile Include="Models\TrackerOptions\TrackerOptions.cs" />
+    <Compile Include="Models\GraphData.cs" />
+    <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\Workspace.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="WindowCommand.cs" />
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
+    <Compile Include="ViewModels\GraphViewModel.cs" />
+    <Compile Include="ViewModels\OptionsViewModel.cs" />
+    <Compile Include="ViewModels\PaneViewModel.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="Views\GraphView.xaml.cs">
+      <DependentUpon>GraphView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
+    <Compile Include="Views\OptionsView.xaml.cs">
+      <DependentUpon>OptionsView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Simple Styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Shell\Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -96,15 +90,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Shell\Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MainView.xaml">
+    <Page Include="Views\GraphView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsView.xaml">
+    <Page Include="Views\OptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\GraphResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\ViewResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,10 +140,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatTrack\StatTrack.csproj">
-      <Project>{ad16419d-7311-4490-b1d9-afc5627137ae}</Project>
-      <Name>StatTrack</Name>
+    <ProjectReference Include="..\StatTrack.DockingAdapter\StatTrack.DockingAdapter.csproj">
+      <Project>{efc46bfe-9c0e-4067-a9d9-a5aae7d1b44e}</Project>
+      <Name>StatTrack.DockingAdapter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\control-play.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bullet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,17 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Practices.Prism.Mvvm;
 
 namespace StatTrack.UI.Views
 {
     /// <summary>
-    /// Interaction logic for SettingsView.xaml
+    /// Interaction logic for GraphView.xaml
     /// </summary>
-    public partial class SettingsView : Window, IView
+    public partial class GraphView : UserControl
     {
-        public SettingsView()
+        public GraphView()
         {
             InitializeComponent();
         }
