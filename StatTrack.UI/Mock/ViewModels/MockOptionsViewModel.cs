@@ -1,25 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using Prism.Modularity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Prism.Regions;
+using StatTrack.UI.Mock.Services;
 using StatTrack.UI.Models;
 using StatTrack.UI.Services;
+using StatTrack.UI.ViewModels;
 using StatTrack.UI.Views;
 
-namespace StatTrack.UI.ViewModels
+namespace StatTrack.UI.Mock.ViewModels
 {
-    public class OptionsViewModel : IOptionsViewModel, IModule
+    public class MockOptionsViewModel : IOptionsViewModel
     {
-        private readonly IRegionManager _regionManager;
-
         public ObservableCollection<Option> RootOptions { get; set; }
         public ISettings Settings { get; set; }
 
-        public OptionsViewModel(IRegionManager regionManager, ISettings settings)
+        public MockOptionsViewModel()
         {
-            _regionManager = regionManager;
-            Settings = settings;
+            Settings = new MockSettings();
 
             RootOptions = new ObservableCollection<Option>();
 
@@ -36,16 +37,6 @@ namespace StatTrack.UI.ViewModels
             mainOption.Options.Add(followersOption);
 
             RootOptions.Add(mainOption);
-        }
-
-        private void OptionsChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
-        {
-            
-        }
-
-        public void Initialize()
-        {
-            _regionManager.Regions["MainRegion"].Add(new OptionsView());
         }
     }
 }

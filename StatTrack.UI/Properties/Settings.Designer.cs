@@ -22,5 +22,38 @@ namespace StatTrack.UI.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Setting {
+            get {
+                return ((string)(this["Setting"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public int update_frequency {
+            get {
+                return ((int)(this["update_frequency"]));
+            }
+            set {
+                this["update_frequency"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("riotgames")]
+        public string channel_username {
+            get {
+                return ((string)(this["channel_username"]));
+            }
+            set {
+                this["channel_username"] = value;
+            }
+        }
     }
 }

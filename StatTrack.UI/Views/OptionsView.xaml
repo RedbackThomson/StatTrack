@@ -4,13 +4,14 @@
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-           xmlns:viewModels="clr-namespace:StatTrack.UI.ViewModels"
+           xmlns:mvvm="http://prismlibrary.com/"
+           xmlns:mockModels="clr-namespace:StatTrack.UI.Mock.ViewModels"
            mc:Ignorable="d"
-           syncfusion:DockingManager.Header="Options" syncfusion:DockingManager.State="Dock"
-           syncfusion:DockingManager.SideInDockedMode="Left" d:DesignHeight="300" d:DesignWidth="300">
-	<UserControl.DataContext>
-		<viewModels:OptionsViewModel />
-	</UserControl.DataContext>
+           
+		   d:DataContext="{d:DesignInstance Type=mockModels:MockOptionsViewModel, IsDesignTimeCreatable=True}"  
+           mvvm:ViewModelLocator.AutoWireViewModel="True"
+           syncfusion:DockingManager.Header="Options" syncfusion:DockingManager.State="Dock" syncfusion:DockingManager.DesiredWidthInDockedMode="250"
+           syncfusion:DockingManager.SideInDockedMode="Left" d:DesignHeight="300" d:DesignWidth="250">
 	<Grid>
 		<Grid.Resources>
 			<HierarchicalDataTemplate x:Key="CheckTreeItem" ItemsSource="{Binding Options}">
@@ -25,6 +26,7 @@
 
 		<syncfusion:TreeViewAdv HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowMultiSelect="False" 
 			ItemTemplate="{StaticResource CheckTreeItem}" AnimationType="None" 
-            ItemContainerStyle="{StaticResource CheckTreeStyle}" ItemsSource="{Binding Options}" AllowDrop="False" AllowDragDrop="False"/>
+            ItemContainerStyle="{StaticResource CheckTreeStyle}" ItemsSource="{Binding RootOptions}"  
+                                AllowDrop="False" AllowDragDrop="False"/>
 	</Grid>
 </UserControl>

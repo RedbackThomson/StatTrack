@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StatTrack.UI.Views
+namespace StatTrack.UI
 {
     /// <summary>
-    /// Interaction logic for OptionsView.xaml
+    /// Interaction logic for SplashScreen.xaml
     /// </summary>
-    public partial class OptionsView : UserControl
+    public partial class SplashScreen : Window
     {
-        public OptionsView()
+        public SplashScreen()
         {
             InitializeComponent();
         }

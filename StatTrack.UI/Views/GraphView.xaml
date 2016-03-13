@@ -4,15 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
-             xmlns:viewModels="clr-namespace:StatTrack.UI.ViewModels"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+			 xmlns:mockModels="clr-namespace:StatTrack.UI.Mock.ViewModels"
+             xmlns:mvvm="http://prismlibrary.com/"
              mc:Ignorable="d" 
-             syncfusion:DockingManager.Header="Options" syncfusion:DockingManager.State="Document"
+             
+			 d:DataContext="{d:DesignInstance Type=mockModels:MockGraphViewModel, IsDesignTimeCreatable=True}"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             syncfusion:DockingManager.DesiredWidthInDockedMode="250"
+             syncfusion:DockingManager.Header="Graph" syncfusion:DockingManager.State="Document"
              syncfusion:DockingManager.SideInDockedMode="Left" d:DesignHeight="500" d:DesignWidth="750"
              Background="White">
-    <UserControl.DataContext>
-        <viewModels:GraphViewModel/>
-    </UserControl.DataContext>
     <Grid>
         <Grid.Resources>           
             <DataTemplate x:Key="legend">
