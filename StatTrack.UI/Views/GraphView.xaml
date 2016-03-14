@@ -11,9 +11,9 @@
              
 			 d:DataContext="{d:DesignInstance Type=mockModels:MockGraphViewModel, IsDesignTimeCreatable=True}"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
-             syncfusion:DockingManager.DesiredWidthInDockedMode="250"
-             syncfusion:DockingManager.Header="Graph" syncfusion:DockingManager.State="Document"
+             syncfusion:DockingManager.Header="{Binding GraphName, RelativeSource={RelativeSource Self}}" syncfusion:DockingManager.State="Document"
              syncfusion:DockingManager.SideInDockedMode="Left" d:DesignHeight="500" d:DesignWidth="750"
+             syncfusion:DockingManager.CanClose="{Binding CanClose, RelativeSource={RelativeSource Self}, Mode=OneWay}"
              Background="White">
     <Grid>
         <Grid.Resources>           

@@ -16,7 +16,7 @@ namespace StatTrack.UI.Mock.Services
             _settings = new Dictionary<string, object>
             {
                 {"channel_username", "riotgames"},
-                {"update_frequency", 5000}
+                {"update_period", 5000}
             };
         }
 

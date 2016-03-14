@@ -14,5 +14,6 @@ namespace StatTrack.UI.ViewModels
     {
         ObservableCollection<Option> RootOptions { get; set; }
         ISettings Settings { get; set; }
+        void CreateOptions();
     }
 }

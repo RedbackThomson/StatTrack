@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Prism.Modularity;
-using Prism.Regions;
+using StatTrack.UI.Mock.Services;
 using StatTrack.UI.Models;
 using StatTrack.UI.Services;
 using StatTrack.UI.ViewModels;
-using StatTrack.UI.Views;
 
 namespace StatTrack.UI.Mock.ViewModels
 {
@@ -18,8 +12,14 @@ namespace StatTrack.UI.Mock.ViewModels
         public ObservableCollection<GraphData> Viewers { get; set; }
         public ObservableCollection<GraphData> Moderators { get; set; }
 
+        public IResults Results { get; set; }
+        private readonly ISettings _settings;
+
         public MockGraphViewModel()
         {
+            Results = new MockResults();
+            _settings = new MockSettings();
+
             Viewers = new ObservableCollection<GraphData>();
 
             Viewers.Add(new GraphData { Time = DateTime.Now.Subtract(new TimeSpan(0, 5, 0)), Data = 5 });

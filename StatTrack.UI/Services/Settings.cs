@@ -1,5 +1,11 @@
 ﻿namespace StatTrack.UI.Services
 {
+    public interface ISettings
+    {
+        object this[string propertyName] { get; set; }
+        void Save();
+    }
+
     class Settings : ISettings
     {
         public object this[string propertyName]

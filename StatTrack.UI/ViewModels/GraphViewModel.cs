@@ -11,21 +11,25 @@ namespace StatTrack.UI.ViewModels
 {
     public class GraphViewModel : IGraphViewModel, IModule
     {
-        private readonly IRegionManager _regionManager;
+        //private readonly IRegionManager _regionManager;
         private readonly ISettings _settings;
 
         public ObservableCollection<GraphData> Viewers { get; set; }
         public ObservableCollection<GraphData> Moderators { get; set; }
 
-        public GraphViewModel(IRegionManager regionManager, ISettings settings)
+        public IResults Results { get; set; }
+
+        public GraphViewModel(IResults results, ISettings settings)
         {
-            _regionManager = regionManager;
+            //_regionManager = regionManager;
             _settings = settings;
+
+            Results = results;
         }
 
         public void Initialize()
         {
-            _regionManager.Regions["MainRegion"].Add(new GraphView());
+            //_regionManager.Regions["MainRegion"].Add(new GraphView());
         }
     }
 }

@@ -1,0 +1,46 @@
+﻿<Window      x:Class="StatTrack.UI.Views.ShellView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+			 xmlns:mvvm="http://prismlibrary.com/"
+			 xmlns:mockModels="clr-namespace:StatTrack.UI.Mock.ViewModels"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 mc:Ignorable="d" 
+
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+			 d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type mockModels:MockShellViewModel}}" 
+			 syncfusion:SkinStorage.VisualStyle="VS2010"
+			 WindowStartupLocation="CenterScreen" WindowState="Maximized"
+			 Height="750" Width="1250"
+             Title="Twitch StatTrack">
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+	</Window.Resources>
+
+	<DockPanel>
+		<syncfusion:MenuAdv DockPanel.Dock="Top">
+			<syncfusion:MenuItemAdv Header="File">
+				<syncfusion:MenuItemAdv Header="Exit" Command="{Binding CloseCommand}"/>
+			</syncfusion:MenuItemAdv>
+			<syncfusion:MenuItemAdv Header="Start" Visibility="{Binding Tracker.CanStart, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="MouseLeftButtonDown">
+						<mvvm:InvokeCommandAction Command="{Binding StartMonitoringCommand}"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</syncfusion:MenuItemAdv>
+			<syncfusion:MenuItemAdv Header="Stop" Visibility="{Binding Tracker.CanStop, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="MouseLeftButtonDown">
+						<mvvm:InvokeCommandAction Command="{Binding StopMonitoringCommand}"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</syncfusion:MenuItemAdv>
+		</syncfusion:MenuAdv>
+
+		<syncfusion:DockingManager x:Name="MainRegion" mvvm:RegionManager.RegionName="MainRegion" UseDocumentContainer="True"
+			DisabledCloseButtonsBehavior="Hide" DocumentCloseButtonType="Individual" />
+	</DockPanel>
+</Window>

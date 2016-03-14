@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using StatTrack.UI.Annotations;
 
@@ -9,10 +11,27 @@ namespace StatTrack.UI.Models
 {
     public class Option : INotifyPropertyChanged
     {
+        public PropertyInfo Property { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event OptionChangedEventHandler OptionChanged;
+        public delegate void OptionChangedEventHandler(PropertyInfo property, bool newOption);
+
+        private string _caption = string.Empty;
+        private bool? _isChecked = false;
+        private ObservableCollection<Option> _options;
+
+        internal List<Option> CheckedItems;
+        internal List<Option> UnCheckedItems;
+        internal Option Parent;
+
         public Option()
         {
+            Property = null;
+
             CheckedItems = new List<Option>();
             UnCheckedItems = new List<Option>();
+
             Options = new ObservableCollection<Option>();            
             Options.CollectionChanged += Options_CollectionChanged;
         }
@@ -26,7 +45,6 @@ namespace StatTrack.UI.Models
             }
         }
 
-        private string _caption = string.Empty;
         public string Caption
         {
             get 
@@ -40,7 +58,6 @@ namespace StatTrack.UI.Models
             }
         }
 
-        private bool? _isChecked = false;
         public bool? IsChecked
         {
             get 
@@ -49,13 +66,13 @@ namespace StatTrack.UI.Models
             }
             set
             {
-                _isChecked= value;
+                _isChecked = value;
                 OnPropertyChanged();
                 OnCheckedChanged(this);
+                OnOptionChanged();
             }
         }
 
-        private ObservableCollection<Option> _options;
         public ObservableCollection<Option> Options
         {
             get 
@@ -68,12 +85,6 @@ namespace StatTrack.UI.Models
                 OnPropertyChanged();
             }
         }
-
-
-
-        internal List<Option> CheckedItems;
-        internal List<Option> UnCheckedItems;
-        internal Option Parent;
 
         private static void OnCheckedChanged(object sender)
         {
@@ -128,13 +139,17 @@ namespace StatTrack.UI.Models
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected virtual void OnOptionChanged()
+        {
+            if (OptionChanged != null && _isChecked.HasValue)
+                OptionChanged(Property, _isChecked.Value);
         }
     }
 }

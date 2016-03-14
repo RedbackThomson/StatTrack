@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Prism.Modularity;
+using StatTrack.UI.Models;
 
 namespace StatTrack.UI.Views
 {
@@ -20,8 +20,14 @@ namespace StatTrack.UI.Views
     /// </summary>
     public partial class GraphView : UserControl
     {
-        public GraphView()
+        public string GraphName { get; set; }
+        public bool CanClose { get; set; }
+
+        public GraphView(string name)
         {
+            CanClose = false;
+            GraphName = name;
+
             InitializeComponent();
         }
     }

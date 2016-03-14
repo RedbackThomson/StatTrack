@@ -35,12 +35,12 @@ namespace StatTrack.UI.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5000")]
-        public int update_frequency {
+        public int update_period {
             get {
-                return ((int)(this["update_frequency"]));
+                return ((int)(this["update_period"]));
             }
             set {
-                this["update_frequency"] = value;
+                this["update_period"] = value;
             }
         }
         

@@ -15,5 +15,7 @@ namespace StatTrack.UI.ViewModels
     {
         ObservableCollection<GraphData> Viewers { get; set; }
         ObservableCollection<GraphData> Moderators { get; set; }
+
+        IResults Results { get; set; }
     }
 }

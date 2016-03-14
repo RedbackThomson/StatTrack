@@ -18,12 +18,8 @@ namespace StatTrack.UI.Mock.ViewModels
         public ObservableCollection<Option> RootOptions { get; set; }
         public ISettings Settings { get; set; }
 
-        public MockOptionsViewModel()
+        public void CreateOptions()
         {
-            Settings = new MockSettings();
-
-            RootOptions = new ObservableCollection<Option>();
-
             var chattersOption = new Option { Caption = "Chatters" };
             chattersOption.Options.Add(new Option { Caption = "Viewers" });
             chattersOption.Options.Add(new Option { Caption = "Moderators" });
@@ -37,6 +33,15 @@ namespace StatTrack.UI.Mock.ViewModels
             mainOption.Options.Add(followersOption);
 
             RootOptions.Add(mainOption);
+        }
+
+        public MockOptionsViewModel()
+        {
+            Settings = new MockSettings();
+
+            RootOptions = new ObservableCollection<Option>();
+
+            CreateOptions();
         }
     }
 }

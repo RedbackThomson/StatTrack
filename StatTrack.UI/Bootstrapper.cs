@@ -1,12 +1,11 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
-using StatTrack.UI.Mock.ViewModels;
 using StatTrack.UI.Services;
 using StatTrack.UI.ViewModels;
+using StatTrack.UI.Views;
 using Syncfusion.Windows.Tools.Controls;
 
 namespace StatTrack.UI
@@ -15,7 +14,7 @@ namespace StatTrack.UI
     {
         protected override DependencyObject CreateShell()
         {
-            return ServiceLocator.Current.GetInstance<Shell>();
+            return ServiceLocator.Current.GetInstance<ShellView>();
         }
 
         protected override void InitializeShell()
@@ -26,7 +25,10 @@ namespace StatTrack.UI
 
         protected override void ConfigureContainer()
         {
+            RegisterTypeIfMissing(typeof(IGraphManager), typeof(GraphManager), true);
+            RegisterTypeIfMissing(typeof(IResults), typeof(Results), true);
             RegisterTypeIfMissing(typeof(ISettings), typeof(Settings), true);
+            RegisterTypeIfMissing(typeof(ITrackerService), typeof(TrackerService), true);
             base.ConfigureContainer();
         }
 
@@ -35,9 +37,7 @@ namespace StatTrack.UI
             RegionAdapterMappings mappings = base.ConfigureRegionAdapterMappings();
 
             if (mappings != null)
-            {
                 mappings.RegisterMapping(typeof(DockingManager), Container.TryResolve<DockingAdapter.DockingAdapter>());
-            }
 
             return mappings;
         }
@@ -46,6 +46,7 @@ namespace StatTrack.UI
         {
             ModuleCatalog catalog = new ModuleCatalog();
             catalog
+                .AddModule(typeof(ShellViewModel))
                 .AddModule(typeof(GraphViewModel))
                 .AddModule(typeof(OptionsViewModel));
             return catalog;
