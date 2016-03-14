@@ -16,7 +16,7 @@
              syncfusion:DockingManager.CanClose="{Binding CanClose, RelativeSource={RelativeSource Self}, Mode=OneWay}"
              Background="White">
     <Grid>
-        <Grid.Resources>           
+        <Grid.Resources>                      
             <DataTemplate x:Key="legend">
                 <StackPanel Orientation="Horizontal">
                     <Grid Margin="20,0,0,0">
@@ -36,47 +36,38 @@
             </DataTemplate>
         </Grid.Resources>
         
-        <chart:SfChart x:Name="SplineChart" FontSize="22" Foreground="Black" 
+        <syncfusion:SfChart x:Name="SplineChart" FontSize="22" Foreground="Black" 
                        Margin="27,25,37,36" AreaBorderThickness="0,1,1,1"
                        Palette="Metro">
 
-            <chart:SfChart.Header>
+            <syncfusion:SfChart.Header>
                 <TextBlock Foreground="Black" FontSize="20" FontFamily="Segoe UI"
-                           Margin="0,0,0,20">Chatters</TextBlock>
-            </chart:SfChart.Header>
+                           Margin="0,0,0,20"><Run Text="Chatters"/></TextBlock>
+       </syncfusion:SfChart.Header>
 
-            <chart:SfChart.PrimaryAxis>
-                <chart:CategoryAxis PlotOffset="30" ShowTrackBallInfo="True" 
+            <syncfusion:SfChart.PrimaryAxis>
+                <syncfusion:CategoryAxis PlotOffset="30" ShowTrackBallInfo="True" 
                                     LabelFormat="hh:mm:ss" Header="Time" Foreground="Black"
                                     LabelTemplate="{StaticResource labelTemplate}"/>
-            </chart:SfChart.PrimaryAxis>
+       </syncfusion:SfChart.PrimaryAxis>
 
-            <chart:SfChart.SecondaryAxis>
-                <chart:NumericalAxis  Header="Users" Foreground="Black" Minimum="0"
+            <syncfusion:SfChart.SecondaryAxis>
+                <syncfusion:NumericalAxis  Header="Users" Foreground="Black" Minimum="0"
                                      LabelTemplate="{StaticResource labelTemplate}"/>
-            </chart:SfChart.SecondaryAxis>
+       </syncfusion:SfChart.SecondaryAxis>
 
-            <chart:SfChart.Legend>
-                <chart:ChartLegend Margin="0,10,0,0" ItemTemplate="{StaticResource legend}" 
-                                   DockPosition="Bottom">
-                </chart:ChartLegend>
-            </chart:SfChart.Legend>
+            <syncfusion:SfChart.Legend>
+                <syncfusion:ChartLegend Margin="0,10,0,0" ItemTemplate="{StaticResource legend}" 
+                                   DockPosition="Bottom"/>
+       </syncfusion:SfChart.Legend>
 
-            <chart:SplineAreaSeries EnableAnimation="True" XBindingPath="Time" Label="Viewers"
-                                ItemsSource="{Binding Viewers}"  YBindingPath="Data" 
-                                ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True">
-                <chart:SplineAreaSeries.AdornmentsInfo>
-                    <chart:ChartAdornmentInfo Symbol="Ellipse" SymbolStroke="White" />
-                </chart:SplineAreaSeries.AdornmentsInfo>
-            </chart:SplineAreaSeries>
-
-            <chart:SplineAreaSeries EnableAnimation="True" XBindingPath="Time" Label="Moderators"
-                                ItemsSource="{Binding Moderators}"  YBindingPath="Data" 
-                                ShowTooltip="True" chart:ChartTooltip.EnableAnimation="True">
-                <chart:SplineAreaSeries.AdornmentsInfo>
-                    <chart:ChartAdornmentInfo Symbol="Ellipse" SymbolStroke="White" />
-                </chart:SplineAreaSeries.AdornmentsInfo>
-            </chart:SplineAreaSeries>
-        </chart:SfChart>
+            <syncfusion:AreaSeries x:Name="Series" EnableAnimation="True" XBindingPath="Timestamp"
+                                YBindingPath="Data" 
+                                ShowTooltip="True" syncfusion:ChartTooltip.EnableAnimation="True">
+                <syncfusion:AreaSeries.AdornmentsInfo>
+                    <syncfusion:ChartAdornmentInfo Symbol="Ellipse" SymbolStroke="White" SymbolWidth="10" SymbolHeight="10" />
+           </syncfusion:AreaSeries.AdornmentsInfo>
+       </syncfusion:AreaSeries>
+   </syncfusion:SfChart>
     </Grid>
 </UserControl>

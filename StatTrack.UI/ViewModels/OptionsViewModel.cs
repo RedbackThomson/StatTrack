@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Prism.Modularity;
 using Prism.Regions;
+using StatTrack.Lib.Twitch;
 using StatTrack.Lib.Twitch.Structures;
 using StatTrack.UI.Models;
 using StatTrack.UI.Services;
@@ -32,30 +33,48 @@ namespace StatTrack.UI.ViewModels
 
         public void CreateOptions()
         {
-            //TODO: Automate getting new options
-            var types = new List<Type> { typeof(Chatters), typeof(FollowsWrapper) };
-            foreach (var type in types)
+            foreach (var type in TwitchApiEndpoint.GetAllEndpoints().Select(x => x.ReturnStructure))
+                CreateOptions(null, type);
+        }
+
+        private void CreateOptions(Option parent, Type structureType)
+        {
+            foreach (var property in structureType.GetProperties())
             {
-                foreach (var property in type.GetProperties())
+                //Get all Graphables underneath the structure
+                foreach (var hasGraphable in property.GetCustomAttributes(false).OfType<HasGraphables>())
                 {
-                    //Get all Graphable properties of the Chatters class
-                    foreach (var graphable in property.GetCustomAttributes(false)
-                        .OfType<Graphable>())
-                    {
-                        var newOption = new Option { Caption = graphable.Name, Property = property };
-                        newOption.OptionChanged += OnOptionChanged;
+                    var newOption = new Option {Caption = hasGraphable.Name};
+                    if(parent == null)
                         RootOptions.Add(newOption);
-                    }
+                    else
+                        parent.Options.Add(newOption);
+
+                    CreateOptions(newOption, property.PropertyType);
+                }
+
+                //Get all Graphable properties of the Chatters class
+                foreach (var graphable in property.GetCustomAttributes(false)
+                    .OfType<Graphable>())
+                {
+                    var graphableProperty = new GraphableProperty { Attribute = graphable, Property = property };
+                    var newOption = new Option { Caption = graphable.Name, Property = graphableProperty };
+                    newOption.OptionChanged += OnOptionChanged;
+                    //Add it under the root
+                    if(parent == null)
+                        RootOptions.Add(newOption);
+                    else
+                        parent.Options.Add(newOption);
                 }
             }
         }
 
-        private void OnOptionChanged(PropertyInfo member, bool newOption)
+        private void OnOptionChanged(GraphableProperty property, bool newOption)
         {
             if (newOption)
-                _graphManager.NewGraph(member);
+                _graphManager.NewGraph(property);
             else
-                _graphManager.DeleteGraph(member);
+                _graphManager.DeleteGraph(property);
         }
 
         public void Initialize()

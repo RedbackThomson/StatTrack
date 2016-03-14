@@ -90,6 +90,7 @@
     <Compile Include="Mock\ViewModels\MockGraphViewModel.cs" />
     <Compile Include="Mock\ViewModels\MockOptionsViewModel.cs" />
     <Compile Include="Mock\ViewModels\MockShellViewModel.cs" />
+    <Compile Include="Models\GraphableProperty.cs" />
     <Compile Include="Models\GraphData.cs" />
     <Compile Include="Models\Option.cs" />
     <Compile Include="Models\ResultsDataSet.cs" />

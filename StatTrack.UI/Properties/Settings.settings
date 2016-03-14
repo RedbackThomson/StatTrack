@@ -9,7 +9,7 @@
       <Value Profile="(Default)">5000</Value>
     </Setting>
     <Setting Name="channel_username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">riotgames</Value>
+      <Value Profile="(Default)">imaqtpie</Value>
     </Setting>
   </Settings>
 </SettingsFile>

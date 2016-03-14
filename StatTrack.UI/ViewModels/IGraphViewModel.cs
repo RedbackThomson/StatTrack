@@ -13,9 +13,6 @@ namespace StatTrack.UI.ViewModels
 {
     public interface IGraphViewModel
     {
-        ObservableCollection<GraphData> Viewers { get; set; }
-        ObservableCollection<GraphData> Moderators { get; set; }
-
-        IResults Results { get; set; }
+        
     }
 }

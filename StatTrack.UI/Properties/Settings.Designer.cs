@@ -46,7 +46,7 @@ namespace StatTrack.UI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("riotgames")]
+        [global::System.Configuration.DefaultSettingValueAttribute("imaqtpie")]
         public string channel_username {
             get {
                 return ((string)(this["channel_username"]));

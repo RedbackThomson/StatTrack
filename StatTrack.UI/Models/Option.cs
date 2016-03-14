@@ -11,11 +11,11 @@ namespace StatTrack.UI.Models
 {
     public class Option : INotifyPropertyChanged
     {
-        public PropertyInfo Property { get; set; }
+        public GraphableProperty Property { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event OptionChangedEventHandler OptionChanged;
-        public delegate void OptionChangedEventHandler(PropertyInfo property, bool newOption);
+        public delegate void OptionChangedEventHandler(GraphableProperty property, bool newOption);
 
         private string _caption = string.Empty;
         private bool? _isChecked = false;

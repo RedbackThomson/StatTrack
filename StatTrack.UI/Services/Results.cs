@@ -1,5 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reflection;
+using System.Windows;
 using StatTrack.Lib.Twitch;
+using StatTrack.Lib.Twitch.Structures;
 using StatTrack.UI.Models;
 
 namespace StatTrack.UI.Services
@@ -7,37 +14,56 @@ namespace StatTrack.UI.Services
     public interface IResults
     {
         void HandleNewData(TwitchApiEndpoint endpoint, DataChangedEventArgs e);
-        ResultsDataSet GetCurrentDataSet(TwitchApiEndpoint endpoint);
+        ResultsDataSet GetCurrentDataSet(GraphableProperty endpointProperty);
     }
 
     public class Results : IResults
     {
-        private readonly Dictionary<TwitchApiEndpoint, ResultsDataSet> _data;
+        private readonly Dictionary<PropertyInfo, ResultsDataSet> _data;
 
         public Results()
         {
-            _data = new Dictionary<TwitchApiEndpoint, ResultsDataSet>();
+            _data = new Dictionary<PropertyInfo, ResultsDataSet>();
         }
 
         public void HandleNewData(TwitchApiEndpoint endpoint, DataChangedEventArgs e)
         {
-            var dataSet = GetCurrentDataSet(endpoint);
-
-            var newData = new ResultsData()
-            {
-                Data = e.Data,
-                Timestamp = e.Timestamp
-            };
-
-            dataSet.DataSet.Add(newData);
+            BreakUpNewData(e.Data, endpoint.ReturnStructure, e.Timestamp);
         }
 
-        public ResultsDataSet GetCurrentDataSet(TwitchApiEndpoint endpoint)
+        private void BreakUpNewData(object structure, Type structureType, DateTime timestamp)
         {
-            if (!_data.ContainsKey(endpoint))
-                _data.Add(endpoint, new ResultsDataSet(endpoint));
+            foreach (var prop in structureType.GetProperties())
+            {
+                var attr = prop.GetCustomAttributes(false).OfType<Graphable>().FirstOrDefault();
+                if (attr != null)
+                {
+                    NewDataSet(prop, attr, timestamp, prop.GetValue(structure));
+                    continue;
+                }
+                //Recursively search properties for graphable
+                if (prop.PropertyType.IsClass)
+                {
+                    BreakUpNewData(prop.GetValue(structure), prop.PropertyType, timestamp);
+                }
+            }
+        }
 
-            return _data[endpoint];
+        private void NewDataSet(PropertyInfo prop, Graphable attr, DateTime timestamp, object data)
+        {
+            if (data == null) return;
+
+            var newSetData = new ResultsData(timestamp, data);
+            ResultsDataSet dataSet = GetCurrentDataSet(new GraphableProperty{Attribute = attr, Property = prop});
+            dataSet.NewData(newSetData);
+        }
+
+        public ResultsDataSet GetCurrentDataSet(GraphableProperty property)
+        {
+            if (!_data.ContainsKey(property.Property))
+                _data.Add(property.Property, new ResultsDataSet(property));
+
+            return _data[property.Property];
         }
     }
 }

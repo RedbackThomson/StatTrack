@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using StatTrack.UI.Annotations;
 using StatTrack.UI.Models;
 
 namespace StatTrack.UI.Views
@@ -18,10 +9,24 @@ namespace StatTrack.UI.Views
     /// <summary>
     /// Interaction logic for GraphView.xaml
     /// </summary>
-    public partial class GraphView : UserControl
+    public partial class GraphView : UserControl, INotifyPropertyChanged
     {
         public string GraphName { get; set; }
         public bool CanClose { get; set; }
+
+        private ResultsDataSet _dataSet;
+        public ResultsDataSet DataSet 
+        {
+            get
+            {
+                return _dataSet;
+            }
+            set
+            {
+                _dataSet = value;
+                UpdateSeries();
+            }
+        }
 
         public GraphView(string name)
         {
@@ -29,6 +34,25 @@ namespace StatTrack.UI.Views
             GraphName = name;
 
             InitializeComponent();
+        }
+
+        private void UpdateSeries()
+        {
+            //Bind the .Count for lists before the data arrives
+            if (DataSet.Properties.Attribute.GraphableProperty != string.Empty)
+                Series.YBindingPath = "Data." + DataSet.Properties.Attribute.GraphableProperty;
+
+            Series.ItemsSource = DataSet.DataSet;
+            Series.Label = DataSet.Properties.Attribute.Name;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

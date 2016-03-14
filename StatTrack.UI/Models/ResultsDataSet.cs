@@ -1,26 +1,56 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using StatTrack.Lib.Twitch;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using StatTrack.Lib.Twitch.Structures;
+using StatTrack.UI.Annotations;
 
 namespace StatTrack.UI.Models
 {
-    public class ResultsDataSet
+    public class ResultsDataSet : INotifyPropertyChanged
     {
-        private string AxisTitle { get; set; }
+        public GraphableProperty Properties { get; set; }
         public ObservableCollection<ResultsData> DataSet { get; set; }
 
-        public ResultsDataSet(TwitchApiEndpoint endpoint)
+        public ResultsDataSet(GraphableProperty prop)
         {
-            AxisTitle = endpoint.Name;
+            Properties = prop;
             DataSet = new ObservableCollection<ResultsData>();
+        }
+
+        public void NewData(ResultsData data)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                DataSet.Add(data);
+                OnPropertyChanged("DataSet");
+            });
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
     public class ResultsData
     {
-        public ITwitchStructure Data { get; set; }
+        public object Data { get; set; }
         public DateTime Timestamp { get; set; }
+
+        public ResultsData(DateTime timestamp, object data)
+        {
+            Timestamp = timestamp;
+            Data = data;
+        }
     }
 }
