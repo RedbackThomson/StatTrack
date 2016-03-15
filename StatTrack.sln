@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatTrack.UI", "StatTrack.UI\StatTrack.UI.csproj", "{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockingAdapter", "DockingAdapter\DockingAdapter.csproj", "{EFC46BFE-9C0E-4067-A9D9-A5AAE7D1B44E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatTrack.DockingAdapter", "StatTrack.DockingAdapter\StatTrack.DockingAdapter.csproj", "{EFC46BFE-9C0E-4067-A9D9-A5AAE7D1B44E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatTrack", "StatTrack\StatTrack.csproj", "{AD16419D-7311-4490-B1D9-AFC5627137AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatTrack.Lib", "StatTrack.Lib\StatTrack.Lib.csproj", "{AD16419D-7311-4490-B1D9-AFC5627137AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFC46BFE-9C0E-4067-A9D9-A5AAE7D1B44E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFC46BFE-9C0E-4067-A9D9-A5AAE7D1B44E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFC46BFE-9C0E-4067-A9D9-A5AAE7D1B44E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -25,6 +21,10 @@ Global
 		{AD16419D-7311-4490-B1D9-AFC5627137AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD16419D-7311-4490-B1D9-AFC5627137AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD16419D-7311-4490-B1D9-AFC5627137AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EAB6464-83B1-4B7D-8D2E-E7D146F325F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
