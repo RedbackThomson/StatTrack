@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="StatTrack.UI.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:StatTrack.UI.Mock.ViewModels"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             mc:Ignorable="d" 
+             
+             d:DataContext="{d:DesignInstance Type=viewModels:MockSettingsViewModel, IsDesignTimeCreatable=True}"  
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             syncfusion:DockingManager.Header="Settings" syncfusion:DockingManager.State="Dock" syncfusion:DockingManager.DesiredWidthInDockedMode="250"
+             syncfusion:DockingManager.SideInDockedMode="Right" d:DesignHeight="300" d:DesignWidth="250">
+    <Grid>
+        <syncfusion:PropertyGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedObject="{Binding Settings, Mode=TwoWay}" EnableGrouping="True"/>
+
+    </Grid>
+</UserControl>

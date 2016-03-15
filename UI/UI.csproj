@@ -59,6 +59,7 @@
     <Reference Include="Prism.Wpf">
       <HintPath>..\packages\Prism.Wpf.6.1.0\lib\net45\Prism.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="syncfusion.propertygrid.wpf, Version=13.4450.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="syncfusion.sfchart.wpf, Version=13.4450.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -89,6 +90,7 @@
     <Compile Include="Mock\Services\MockSettings.cs" />
     <Compile Include="Mock\ViewModels\MockGraphViewModel.cs" />
     <Compile Include="Mock\ViewModels\MockOptionsViewModel.cs" />
+    <Compile Include="Mock\ViewModels\MockSettingsViewModel.cs" />
     <Compile Include="Mock\ViewModels\MockShellViewModel.cs" />
     <Compile Include="Models\GraphableProperty.cs" />
     <Compile Include="Models\GraphData.cs" />
@@ -103,10 +105,8 @@
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\GraphViewModel.cs" />
-    <Compile Include="ViewModels\IGraphViewModel.cs" />
-    <Compile Include="ViewModels\IOptionsViewModel.cs" />
-    <Compile Include="ViewModels\IShellViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\GraphView.xaml.cs">
       <DependentUpon>GraphView.xaml</DependentUpon>
@@ -114,6 +114,10 @@
     <Compile Include="Views\OptionsView.xaml.cs">
       <DependentUpon>OptionsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -121,6 +125,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -183,7 +190,9 @@
   <ItemGroup>
     <Resource Include="Images\bullet.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\control-stop.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

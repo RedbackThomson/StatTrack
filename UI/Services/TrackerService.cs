@@ -28,8 +28,8 @@ namespace StatTrack.UI.Services
 
         public TrackerService(ISettings settings, IResults results)
         {
-            StatTrack = new Lib.StatTrack((int) settings["update_period"],
-                (string) settings["channel_username"]);
+            StatTrack = new Lib.StatTrack(settings.UpdatePeriod,
+                settings.ChannelUsername);
 
             _results = results;
 

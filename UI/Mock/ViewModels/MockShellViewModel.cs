@@ -15,7 +15,6 @@ namespace StatTrack.UI.Mock.ViewModels
 
         public void Initialize()
         {
-            
         }
     }
 }

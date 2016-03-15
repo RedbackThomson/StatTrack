@@ -17,6 +17,8 @@
              Title="Twitch StatTrack">
 	<Window.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Image x:Key="StartImage" Source="pack://application:,,,/StatTrack.UI;component/Images/control-play.gif" Width="16" Height="16"/>
+        <Image x:Key="StopImage" Source="pack://application:,,,/StatTrack.UI;component/Images/control-stop.gif" Width="16" Height="16" />
 	</Window.Resources>
 
 	<DockPanel>
@@ -24,9 +26,15 @@
 			<syncfusion:MenuItemAdv Header="File">
 				<syncfusion:MenuItemAdv Header="Exit" Command="{Binding CloseCommand}"/>
 			</syncfusion:MenuItemAdv>
-			<syncfusion:MenuItemAdv Header="Start" Visibility="{Binding Tracker.CanStart, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Command="{Binding StartMonitoringCommand}"/>
-			<syncfusion:MenuItemAdv Header="Stop" Visibility="{Binding Tracker.CanStop, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Command="{Binding StopMonitoringCommand}"/>
 		</syncfusion:MenuAdv>
+		<syncfusion:ToolBarManager VerticalAlignment="Top" DockPanel.Dock="Top" Height="28">
+			<syncfusion:ToolBarTrayAdv VerticalAlignment="Top" HorizontalAlignment="Left">
+				<syncfusion:ToolBarAdv ToolBarName="Controls">
+					<Button syncfusion:ToolBarAdv.Label="Start" Height="22" Width="22" ToolTip="Start" Command="{Binding StartMonitoringCommand}" Content="{StaticResource StartImage}" IsEnabled="{Binding Tracker.CanStart, Mode=OneWay}"/>
+					<Button syncfusion:ToolBarAdv.Label="Stop" Height="22" Width="22" ToolTip="Stop" Command="{Binding StopMonitoringCommand}" Content="{StaticResource StopImage}" IsEnabled="{Binding Tracker.CanStop, Mode=OneWay}"/>
+				</syncfusion:ToolBarAdv>
+			</syncfusion:ToolBarTrayAdv>
+		</syncfusion:ToolBarManager>
 
 		<syncfusion:DockingManager x:Name="MainRegion" mvvm:RegionManager.RegionName="MainRegion" UseDocumentContainer="True"
 			DisabledCloseButtonsBehavior="Hide" DocumentCloseButtonType="Individual" />

@@ -6,6 +6,16 @@ using StatTrack.UI.Services;
 
 namespace StatTrack.UI.ViewModels
 {
+    public interface IShellViewModel
+    {
+        ITrackerService Tracker { get; }
+
+        ICommand StartMonitoringCommand { get; set; }
+        ICommand StopMonitoringCommand { get; set; }
+
+        ICommand CloseCommand { get; set; }
+    }
+
     public class ShellViewModel : IShellViewModel, IModule
     {
         public ITrackerService Tracker { get { return _tracker; } }

@@ -9,6 +9,11 @@ using StatTrack.UI.Views;
 
 namespace StatTrack.UI.ViewModels
 {
+    public interface IGraphViewModel
+    {
+
+    }
+
     public class GraphViewModel : IGraphViewModel, IModule
     {
         public GraphViewModel()

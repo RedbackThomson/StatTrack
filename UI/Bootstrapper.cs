@@ -10,7 +10,7 @@ using Syncfusion.Windows.Tools.Controls;
 
 namespace StatTrack.UI
 {
-    class Bootstrapper : UnityBootstrapper
+    public class Bootstrapper : UnityBootstrapper
     {
         protected override DependencyObject CreateShell()
         {
@@ -29,6 +29,7 @@ namespace StatTrack.UI
             RegisterTypeIfMissing(typeof(IResults), typeof(Results), true);
             RegisterTypeIfMissing(typeof(ISettings), typeof(Settings), true);
             RegisterTypeIfMissing(typeof(ITrackerService), typeof(TrackerService), true);
+
             base.ConfigureContainer();
         }
 
@@ -46,9 +47,10 @@ namespace StatTrack.UI
         {
             ModuleCatalog catalog = new ModuleCatalog();
             catalog
-                .AddModule(typeof(ShellViewModel))
                 .AddModule(typeof(GraphViewModel))
-                .AddModule(typeof(OptionsViewModel));
+                .AddModule(typeof(OptionsViewModel))
+                .AddModule(typeof(SettingsViewModel))
+                .AddModule(typeof(ShellViewModel));
             return catalog;
         }
     }

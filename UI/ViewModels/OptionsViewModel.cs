@@ -11,6 +11,13 @@ using StatTrack.UI.Views;
 
 namespace StatTrack.UI.ViewModels
 {
+    interface IOptionsViewModel
+    {
+        ObservableCollection<Option> RootOptions { get; set; }
+        ISettings Settings { get; set; }
+        void CreateOptions();
+    }
+
     public class OptionsViewModel : IOptionsViewModel, IModule
     {
         private readonly IGraphManager _graphManager;
