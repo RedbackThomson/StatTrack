@@ -26,6 +26,7 @@ namespace StatTrack.UI
         protected override void ConfigureContainer()
         {
             RegisterTypeIfMissing(typeof(IGraphManager), typeof(GraphManager), true);
+            RegisterTypeIfMissing(typeof(INotifier), typeof(Notifier), true);
 			RegisterTypeIfMissing(typeof(IOptions), typeof(Options), true);
             RegisterTypeIfMissing(typeof(IResults), typeof(Results), true);
             RegisterTypeIfMissing(typeof(ISettings), typeof(Settings), true);

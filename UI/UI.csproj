@@ -15,6 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
     <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
+    <TargetPlatformVersion>8.0</TargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,10 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="NotificationsExtensions.Win10.Portable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NotificationsExtensions.Win10.14295.0.1\lib\portable-net45+sl50+win+wpa81+wp80\NotificationsExtensions.Win10.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Prism">
       <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -58,6 +63,10 @@
     </Reference>
     <Reference Include="Prism.Wpf">
       <HintPath>..\packages\Prism.Wpf.6.1.0\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="QueryString.Portable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QueryString.NET.1.0.0\lib\portable-net4+sl50+win+wpa81+wp80\QueryString.Portable.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="syncfusion.propertygrid.wpf, Version=13.4450.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="syncfusion.sfchart.wpf, Version=13.4450.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
@@ -78,6 +87,7 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Windows" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +109,7 @@
     <Compile Include="Models\TrackOption.cs" />
     <Compile Include="Models\ResultsDataSet.cs" />
     <Compile Include="Services\GraphManager.cs" />
+    <Compile Include="Services\Notifier.cs" />
     <Compile Include="Services\Options.cs" />
     <Compile Include="Services\Results.cs" />
     <Compile Include="Services\Settings.cs" />
