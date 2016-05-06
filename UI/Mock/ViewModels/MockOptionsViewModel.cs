@@ -8,20 +8,20 @@ namespace StatTrack.UI.Mock.ViewModels
 {
     public class MockOptionsViewModel : IOptionsViewModel
     {
-        public ObservableCollection<Option> RootOptions { get; set; }
+        public ObservableCollection<TrackOption> RootOptions { get; set; }
         public ISettings Settings { get; set; }
 
         public void CreateOptions()
         {
-            var chattersOption = new Option { Caption = "Chatters" };
-            chattersOption.Options.Add(new Option { Caption = "Viewers" });
-            chattersOption.Options.Add(new Option { Caption = "Moderators" });
-            chattersOption.Options.Add(new Option { Caption = "Staff" });
-            chattersOption.Options.Add(new Option { Caption = "Global Moderators" });
+            var chattersOption = new TrackOption { Caption = "Chatters" };
+            chattersOption.Options.Add(new TrackOption { Caption = "Viewers" });
+            chattersOption.Options.Add(new TrackOption { Caption = "Moderators" });
+            chattersOption.Options.Add(new TrackOption { Caption = "Staff" });
+            chattersOption.Options.Add(new TrackOption { Caption = "Global Moderators" });
 
-            var followersOption = new Option { Caption = "Followers" };
+            var followersOption = new TrackOption { Caption = "Followers" };
 
-            var mainOption = new Option { Caption = "Trackers" };
+            var mainOption = new TrackOption { Caption = "Trackers" };
             mainOption.Options.Add(chattersOption);
             mainOption.Options.Add(followersOption);
 
@@ -32,7 +32,7 @@ namespace StatTrack.UI.Mock.ViewModels
         {
             Settings = new MockSettings();
 
-            RootOptions = new ObservableCollection<Option>();
+            RootOptions = new ObservableCollection<TrackOption>();
 
             CreateOptions();
         }

@@ -86,17 +86,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Mock\Services\MockOptions.cs" />
     <Compile Include="Mock\Services\MockResults.cs" />
     <Compile Include="Mock\Services\MockSettings.cs" />
     <Compile Include="Mock\ViewModels\MockGraphViewModel.cs" />
+    <Compile Include="Mock\ViewModels\MockNotificationsViewModel.cs" />
     <Compile Include="Mock\ViewModels\MockOptionsViewModel.cs" />
     <Compile Include="Mock\ViewModels\MockSettingsViewModel.cs" />
     <Compile Include="Mock\ViewModels\MockShellViewModel.cs" />
     <Compile Include="Models\GraphableProperty.cs" />
     <Compile Include="Models\GraphData.cs" />
-    <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\TrackOption.cs" />
     <Compile Include="Models\ResultsDataSet.cs" />
     <Compile Include="Services\GraphManager.cs" />
+    <Compile Include="Services\Options.cs" />
     <Compile Include="Services\Results.cs" />
     <Compile Include="Services\Settings.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -105,15 +108,23 @@
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\GraphViewModel.cs" />
+    <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\GraphView.xaml.cs">
       <DependentUpon>GraphView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NotificationsView.xaml.cs">
+      <DependentUpon>NotificationsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OptionsView.xaml.cs">
       <DependentUpon>OptionsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\NotificationsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

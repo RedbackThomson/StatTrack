@@ -26,6 +26,7 @@ namespace StatTrack.UI
         protected override void ConfigureContainer()
         {
             RegisterTypeIfMissing(typeof(IGraphManager), typeof(GraphManager), true);
+			RegisterTypeIfMissing(typeof(IOptions), typeof(Options), true);
             RegisterTypeIfMissing(typeof(IResults), typeof(Results), true);
             RegisterTypeIfMissing(typeof(ISettings), typeof(Settings), true);
             RegisterTypeIfMissing(typeof(ITrackerService), typeof(TrackerService), true);
@@ -48,6 +49,7 @@ namespace StatTrack.UI
             ModuleCatalog catalog = new ModuleCatalog();
             catalog
                 .AddModule(typeof(GraphViewModel))
+                .AddModule(typeof(NotificationsViewModel))
                 .AddModule(typeof(OptionsViewModel))
                 .AddModule(typeof(SettingsViewModel))
                 .AddModule(typeof(ShellViewModel));

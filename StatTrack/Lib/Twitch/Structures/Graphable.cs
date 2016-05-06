@@ -2,16 +2,17 @@
 
 namespace StatTrack.Lib.Twitch.Structures
 {
+    /// <summary>
+    /// Used to define an object that can be graphed and tracked
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class Graphable : Attribute
     {
-        private readonly bool _graphable;
         public string Name { get; set; }
         public string GraphableProperty { get; set; }
 
         public Graphable(string name)
         {
-            _graphable = true;
             Name = name;
         }
 
@@ -19,14 +20,11 @@ namespace StatTrack.Lib.Twitch.Structures
         {
             GraphableProperty = graphableProperty;
         }
-
-
-        public Graphable(bool graphable)
-        {
-            _graphable = graphable;
-        }
     }
 
+    /// <summary>
+    /// Used to declare a class that contains Graphable objects
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class HasGraphables : Attribute
     {

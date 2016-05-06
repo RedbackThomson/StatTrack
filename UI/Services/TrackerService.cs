@@ -12,6 +12,8 @@ namespace StatTrack.UI.Services
         bool CanStop { get; }
         bool IsRunning { get; }
 
+        void AddTracker(TwitchApiEndpoint endpoint);
+        void RemoveTracker(TwitchApiEndpoint endpoint);
         void Start();
         void Stop();
     }
@@ -33,11 +35,19 @@ namespace StatTrack.UI.Services
 
             _results = results;
 
-            //TODO: Automate
-            StatTrack.Trackers.Add(TwitchApiEndpoint.Chatters);
-
             //Pass the new data to the results
             StatTrack.Handlers.DataChanged += _results.HandleNewData;
+        }
+
+        public void AddTracker(TwitchApiEndpoint endpoint)
+        {
+            StatTrack.Trackers.Add(endpoint);
+        }
+
+        public void RemoveTracker(TwitchApiEndpoint endpoint)
+        {
+            if(StatTrack.Trackers.Contains(endpoint))
+                StatTrack.Trackers.Remove(endpoint);
         }
 
         public void Start()

@@ -3,6 +3,9 @@ using StatTrack.Lib.Twitch.Structures;
 
 namespace StatTrack.UI.Models
 {
+    /// <summary>
+    /// A property that is graphable
+    /// </summary>
     public class GraphableProperty
     {
         public PropertyInfo Property { get; set; }
@@ -15,7 +18,8 @@ namespace StatTrack.UI.Models
 
         public override bool Equals(object obj)
         {
-            return Property.Equals(obj);
+            GraphableProperty prop = obj as GraphableProperty;
+            return prop != null && Property.Equals(prop.Property);
         }
     }
 }

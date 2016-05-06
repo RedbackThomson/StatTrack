@@ -39,7 +39,9 @@ namespace StatTrack.UI.Views
         private void UpdateSeries()
         {
             //Bind the .Count for lists before the data arrives
-            if (DataSet.Properties.Attribute.GraphableProperty != string.Empty)
+            if (string.IsNullOrEmpty(DataSet.Properties.Attribute.GraphableProperty))
+                Series.YBindingPath = "Data";
+            else
                 Series.YBindingPath = "Data." + DataSet.Properties.Attribute.GraphableProperty;
 
             Series.ItemsSource = DataSet.DataSet;

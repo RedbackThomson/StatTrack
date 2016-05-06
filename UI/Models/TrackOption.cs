@@ -7,7 +7,7 @@ using StatTrack.UI.Annotations;
 
 namespace StatTrack.UI.Models
 {
-    public class Option : INotifyPropertyChanged
+    public class TrackOption : INotifyPropertyChanged
     {
         public GraphableProperty Property { get; set; }
 
@@ -17,27 +17,27 @@ namespace StatTrack.UI.Models
 
         private string _caption = string.Empty;
         private bool? _isChecked = false;
-        private ObservableCollection<Option> _options;
+        private ObservableCollection<TrackOption> _options;
 
-        internal List<Option> CheckedItems;
-        internal List<Option> UnCheckedItems;
-        internal Option Parent;
+        internal List<TrackOption> CheckedItems;
+        internal List<TrackOption> UnCheckedItems;
+        internal TrackOption Parent;
 
-        public Option()
+        public TrackOption()
         {
             Property = null;
 
-            CheckedItems = new List<Option>();
-            UnCheckedItems = new List<Option>();
+            CheckedItems = new List<TrackOption>();
+            UnCheckedItems = new List<TrackOption>();
 
-            Options = new ObservableCollection<Option>();            
+            Options = new ObservableCollection<TrackOption>();            
             Options.CollectionChanged += Options_CollectionChanged;
         }
 
         private void Options_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Add) return;
-            foreach (Option model in e.NewItems)
+            foreach (TrackOption model in e.NewItems)
             {
                 model.Parent = this;
             }
@@ -71,7 +71,7 @@ namespace StatTrack.UI.Models
             }
         }
 
-        public ObservableCollection<Option> Options
+        public ObservableCollection<TrackOption> Options
         {
             get 
             {
@@ -86,7 +86,7 @@ namespace StatTrack.UI.Models
 
         private static void OnCheckedChanged(object sender)
         {
-            var instance = sender as Option;
+            var instance = sender as TrackOption;
 
             if (instance.IsChecked.HasValue && instance.IsChecked.Value)
             {
