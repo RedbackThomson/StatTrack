@@ -32,7 +32,8 @@ namespace StatTrack.UI.ViewModels
 
         private readonly Dictionary<GraphableProperty, TwitchApiEndpoint> _propertyEndpoints; 
 
-        public OptionsViewModel(ITrackerService trackerService, IGraphManager graphManager, IRegionManager regionManager, ISettings settings, IOptions options)
+        public OptionsViewModel(ITrackerService trackerService, IGraphManager graphManager, IRegionManager regionManager, 
+            ISettings settings, IOptions options)
         {
             _trackerService = trackerService;
             _graphManager = graphManager;
@@ -48,9 +49,7 @@ namespace StatTrack.UI.ViewModels
         public void CreateOptions()
         {
             foreach (var endpoint in TwitchApiEndpoint.GetAllEndpoints())
-            {
                 CreateOptions(endpoint, null, endpoint.ReturnStructure);
-            }
         }
 
         private void CreateOptions(TwitchApiEndpoint endpoint, TrackOption parent, Type structureType)

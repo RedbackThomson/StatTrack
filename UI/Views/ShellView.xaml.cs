@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using StatTrack.UI.Models;
 
 namespace StatTrack.UI.Views
 {

@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Mock\Services\MockOptions.cs" />
     <Compile Include="Mock\Services\MockResults.cs" />
     <Compile Include="Mock\Services\MockSettings.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Models\TrackOption.cs" />
     <Compile Include="Models\ResultsDataSet.cs" />
     <Compile Include="Services\GraphManager.cs" />
+    <Compile Include="Services\Notifications.cs" />
     <Compile Include="Services\Notifier.cs" />
     <Compile Include="Services\Options.cs" />
     <Compile Include="Services\Results.cs" />

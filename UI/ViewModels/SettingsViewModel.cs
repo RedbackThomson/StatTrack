@@ -5,7 +5,7 @@ using StatTrack.UI.Views;
 
 namespace StatTrack.UI.ViewModels
 {
-    interface ISettingsViewModel
+    public interface ISettingsViewModel
     {
         ISettings Settings { get; set; }
     }

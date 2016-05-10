@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Windows.UI.Notifications;
 using NotificationsExtensions.Toasts;
+using StatTrack.UI.Models;
 
 namespace StatTrack.UI.Services
 {
@@ -15,14 +16,12 @@ namespace StatTrack.UI.Services
     {
         private readonly ISettings _settings;
 
-        private const string AppTitle = "StatTrack";
-        private const string AppId = "StatTrack";
-
         private readonly List<ToastNotification> _notifications; 
 
         public Notifier(ISettings settings)
         {
             _settings = settings;
+
             _notifications = new List<ToastNotification>();
         }
 
@@ -38,13 +37,13 @@ namespace StatTrack.UI.Services
                 ExpirationTime = DateTime.Now.AddMilliseconds(_settings.UpdatePeriod)
             };
             _notifications.Add(toast);
-            ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
+            ToastNotificationManager.CreateToastNotifier(Constants.AppId).Show(toast);
         }
 
         public void ClearNotifications()
         {
             foreach (var toast in _notifications)
-                ToastNotificationManager.CreateToastNotifier(AppId).Hide(toast);
+                ToastNotificationManager.CreateToastNotifier(Constants.AppId).Hide(toast);
             _notifications.Clear();
         }
 
@@ -54,7 +53,7 @@ namespace StatTrack.UI.Services
             {
                 TitleText = new ToastText()
                 {
-                    Text = AppTitle
+                    Text = Constants.AppName
                 },
                 BodyTextLine1 = new ToastText()
                 {

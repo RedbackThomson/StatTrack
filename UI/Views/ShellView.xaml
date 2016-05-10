@@ -6,6 +6,7 @@
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 			 xmlns:mvvm="http://prismlibrary.com/"
 			 xmlns:mockModels="clr-namespace:StatTrack.UI.Mock.ViewModels"
+             xmlns:models="clr-namespace:StatTrack.UI.Models"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 mc:Ignorable="d" 
 
@@ -13,8 +14,7 @@
 			 d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type mockModels:MockShellViewModel}}" 
 			 syncfusion:SkinStorage.VisualStyle="VS2010"
 			 WindowStartupLocation="CenterScreen" WindowState="Maximized"
-			 Height="750" Width="1250"
-             Title="Twitch StatTrack">
+			 Height="750" Width="1250" Title="{x:Static models:Constants.AppName}">
 	<Window.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Image x:Key="StartImage" Source="pack://application:,,,/StatTrack.UI;component/Images/control-play.gif" Width="16" Height="16"/>

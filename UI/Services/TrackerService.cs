@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StatTrack.Lib;
 using StatTrack.Lib.Twitch;
@@ -20,7 +21,11 @@ namespace StatTrack.UI.Services
 
     public class TrackerService : ITrackerService
     {
-        private readonly IResults _results;
+        /// <summary>
+        /// Counts the number of times a tracker is added to the list, 
+        /// so as to remove it only when nothing depends on it
+        /// </summary>
+        private readonly Dictionary<TwitchApiEndpoint, int> _trackerCount; 
 
         protected IStatTrack StatTrack { get; set; }
 
@@ -33,21 +38,32 @@ namespace StatTrack.UI.Services
             StatTrack = new Lib.StatTrack(settings.UpdatePeriod,
                 settings.ChannelUsername);
 
-            _results = results;
-
             //Pass the new data to the results
-            StatTrack.Handlers.DataChanged += _results.HandleNewData;
+            StatTrack.Handlers.DataChanged += results.HandleNewData;
+
+            _trackerCount = new Dictionary<TwitchApiEndpoint, int>();
         }
 
         public void AddTracker(TwitchApiEndpoint endpoint)
         {
             StatTrack.Trackers.Add(endpoint);
+            if (_trackerCount.ContainsKey(endpoint))
+                _trackerCount[endpoint]++;
+            else
+                _trackerCount.Add(endpoint, 1);
         }
 
         public void RemoveTracker(TwitchApiEndpoint endpoint)
         {
+            if (_trackerCount.ContainsKey(endpoint) && _trackerCount[endpoint] > 1)
+            {
+                _trackerCount[endpoint]--;
+                return;
+            }
+
             if(StatTrack.Trackers.Contains(endpoint))
                 StatTrack.Trackers.Remove(endpoint);
+            _trackerCount.Remove(endpoint);
         }
 
         public void Start()
